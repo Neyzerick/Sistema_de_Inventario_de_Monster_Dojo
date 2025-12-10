@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Monster Dojo - S. de Inventarios de juegos de Mesa</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+     <!-- Image Lightbox -->
+    <div class="image-lightbox" id="imageLightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+        
+        <!-- Zoom Controls -->
+        <div class="lightbox-controls">
+            <button class="lightbox-btn" onclick="resetZoom()" title="Tamaño Original">🔄</button>
+            <button class="lightbox-btn" onclick="zoomOut()" title="Alejar">➖</button>
+            <div class="zoom-level" id="zoomLevel">100%</div>
+            <button class="lightbox-btn" onclick="zoomIn()" title="Acercar">➕</button>
+        </div>
+
+        <!-- Image Container -->
+        <div class="lightbox-image-container" id="imageContainer">
+            <img class="lightbox-image" id="lightboxImage" src="" alt="">
+        </div>
+    </div>
+
+    <div class="bg-animation">
+     
+
+        <div class="bg-shape"></div>
+        <div class="bg-shape"></div>
+        <div class="bg-shape"></div>
+    
+    </div>
+      <!-- Toggle theme button -->
+  <button id="themeToggle" class="theme-toggle" onclick="toggleTheme()">🌙</button>
+    <!-- Preview Overlay -->
+    <div class="preview-overlay" id="previewOverlay"></div>
+
+    <!-- Preview Modal -->
+    <div class="preview-modal" id="previewModal">
+        <div class="preview-header">
+            <div class="preview-icon" id="previewIcon">🏠</div>
+            <div class="preview-title">
+                <h3 id="previewTitle">Título</h3>
+                <p id="previewSubtitle">Subtítulo</p>
+            </div>
+        </div>
+        <div class="preview-content" id="previewContent">
+            Contenido de la previsualización
+        </div>
+        <div class="preview-features" id="previewFeatures">
+            <!-- Tags dinámicos -->
+        </div>
+    </div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="logo-section">
+            <div class="logo-icon"><img src="images/logo.png" width="150 px"></div>
+            <div class="logo-text">MonsterDojo</div>
+            <div class="logo-subtitle">Sistema de Inventarios de juegos de mesa</div>
+        </div>
+
+        <ul class="nav-menu">
+            <li class="nav-item" data-preview="home">
+                <a class="nav-link active" data-page="home">
+                    <span class="nav-icon">🏠</span>
+                    <span class="nav-text">Inicio</span>
+                </a>
+            </li>
+
+            <li class="nav-item" data-preview="marco">
+                <a class="nav-link" data-page="marco">
+                    <span class="nav-icon">📚</span>
+                    <span class="nav-text">Marco Teórico</span>
+                    <span class="nav-arrow">▸</span>
+                </a>
+                <div class="sub-menu">
+                    <a href="#" class="sub-link" data-section="introduccion">Introducción</a>
+                    <a href="#" class="sub-link" data-section="antecedentes">Antecedentes</a>
+                    <a href="#" class="sub-link" data-section="objetivos">Objetivos</a>
+                    <a href="#" class="sub-link" data-section="planteamiento">Planteamiento del Problema</a>
+                    <a href="#" class="sub-link" data-section="arbol">Árbol de Problemas</a>
+                    <a href="#" class="sub-link" data-section="formulacion">Formulación del Problema</a>
+                    <a href="#" class="sub-link" data-section="proposito">Propósito del Estudio</a>
+                    <a href="#" class="sub-link" data-section="metodologia">Metodología</a>
+                </div>
+            </li>
+
+            <li class="nav-item" data-preview="analisis">
+                <a class="nav-link" data-page="analisis">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-text">Análisis Estructurado</span>
+                    <span class="nav-arrow">▸</span>
+                </a>
+                <div class="sub-menu">
+                    <!-- Modelo Ambiental con sub-submenú -->
+                    <div class="sub-menu-item">
+                        <a href="#" class="sub-link sub-parent" data-page="modelo-ambiental">
+                            <span style="margin-right: 8px;">🌍</span> Modelo Ambiental
+                            <span class="sub-arrow">▸</span>
+                        </a>
+                        <div class="sub-sub-menu">
+                            <a href="#" class="sub-sub-link" data-page="modelo-ambiental" data-section="declaracion-propositos">
+                                Declaración de Propósitos
+                            </a>
+                            <a href="#" class="sub-sub-link" data-page="modelo-ambiental" data-section="diagrama-contexto-ambiental">
+                                Diagrama de Contexto
+                            </a>
+                            <a href="#" class="sub-sub-link" data-page="modelo-ambiental" data-section="lista-acontecimientos">
+                                Lista de Acontecimientos
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Modelo de Comportamiento con sub-submenú -->
+                    <div class="sub-menu-item">
+                        <a href="#" class="sub-link sub-parent" data-page="modelo-comportamiento">
+                            <span style="margin-right: 8px;">🎯</span> Modelo de Comportamiento
+                            <span class="sub-arrow">▸</span>
+                        </a>
+                        <div class="sub-sub-menu">
+                            <a href="#" class="sub-sub-link" data-page="modelo-comportamiento" data-section="diagrama-general">
+                                Diagrama General del Sistema
+                            </a>
+                            <a href="#" class="sub-sub-link" data-page="modelo-comportamiento" data-section="niveles-dfd">
+                                Niveles de DFD
+                            </a>
+                            <a href="#" class="sub-sub-link" data-page="modelo-comportamiento" data-section="diccionario-datos-comportamiento">
+                                Diccionario de Datos
+                            </a>
+                            <a href="#" class="sub-sub-link" data-page="modelo-comportamiento" data-section="diagrama-entidad-relacion">
+                                Diagrama Entidad-Relación
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item" data-preview="objetos">
+                <a class="nav-link" data-page="objetos">
+                    <span class="nav-icon">🎯</span>
+                    <span class="nav-text">Orientado a Objetos</span>
+                    <span class="nav-arrow">▸</span>
+                </a>
+                <div class="sub-menu">
+                    <a href="#" class="sub-link" data-section="modelo-uml">Diagrama de Clases</a>
+                    <a href="#" class="sub-link" data-section="modelo-sistema">CU de Sistema</a>
+                    <a href="#" class="sub-link" data-section="modelo-negocio">CU de Negocio</a>
+                    <a href="#" class="sub-link" data-section="modelo-texto">CU de tipo texto expandido</a>
+                </div>
+            </li>
+
+            <li class="nav-item" data-preview="video">
+                <a class="nav-link" data-page="video">
+                    <span class="nav-icon">🎥</span>
+                    <span class="nav-text">Video</span>
+                </a>
+            </li>
+
+            <li class="nav-item" data-preview="contacto">
+                <a class="nav-link" data-page="contacto">
+                    <span class="nav-icon">📞</span>
+                    <span class="nav-text">Contactos</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- Toggle Button -->
+    <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()">
+        ☰
+    </button>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <!-- HOME PAGE -->
+        <div class="page active" id="home">
+            <div class="hero">
+                <div class="hero-content">
+                    <div class="hero-dice">
+                        <span class="dice">🎲</span>
+                        <span class="dice">🎯</span>
+                        <span class="dice">🃏</span>
+                    </div>
+                    <h1>Sistema de Inventarios de juegos de Mesa</h1>
+                    <p class="hero-subtitle">Gestión Inteligente de Juegos de Mesa</p>
+                    <p class="hero-description">
+                        Una solución completa y moderna para el control, seguimiento y análisis de tu colección de juegos de mesa. 
+                        Optimiza tu inventario con tecnología de vanguardia y análisis detallado.
+                    </p>
+                    <div class="hero-buttons">
+                        <button class="hero-btn hero-btn-primary" onclick="navigateToPage('marco')">
+                            Explorar Documentación
+                        </button>
+                        <button class="hero-btn hero-btn-secondary" onclick="navigateToPage('video')">
+                            Ver Demo
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📦</div>
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Juegos Registrados</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-number">99.9%</div>
+                    <div class="stat-label">Disponibilidad</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🚀</div>
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Acceso Total</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🎮</div>
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Satisfacción</div>
+                </div>
+            </div>
+
+            <div class="games-section">
+                <h2 class="section-title">Juegos de Mesa Populares en Inventario</h2>
+                <div class="games-grid">
+                    <div class="game-card">
+                        <div class="game-image">🏠</div>
+                        <div class="game-content">
+                            <h3 class="game-title">Monopoly</h3>
+                            <div class="game-meta">
+                                <span class="game-tag">Clásico</span>
+                                <span class="game-tag">Familiar</span>
+                            </div>
+                            <p class="game-description">
+                                El juego de bienes raíces más famoso del mundo. Compra, vende y negocia propiedades para dominar el mercado.
+                            </p>
+                            <div class="game-stats">
+                                <div class="game-stat">
+                                    <div class="game-stat-value">2-8</div>
+                                    <div class="game-stat-label">Jugadores</div>
+                                </div>
+                                <div class="game-stat">
+                                    <div class="game-stat-value">120min</div>
+                                    <div class="game-stat-label">Duración</div>
+                                </div>
+                                <div class="game-stat">
+                                    <div class="game-stat-value">25</div>
+                                    <div class="game-stat-label">Stock</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="game-card">
+                        <div class="game-image">🔍</div>
+                        <div class="game-content">
+                            <h3 class="game-title">Clue (Cluedo)</h3>
+                            <div class="game-meta">
+                                <span class="game-tag">Misterio</span>
+                                <span class="game-tag">Deducción</span>
+                            </div>
+                            <p class="game-description">
+                                Resuelve el asesinato descubriendo quién lo hizo, con qué arma y en qué habitación. Clásico juego de detectives.
+                            </p>
+                            <div class="game-stats">
+                                <div class="game-stat">
+                                    <div class="game-stat-value">3-6</div>
+                                    <div class="game-stat-label">Jugadores</div>
+                                </div>
+                                <div class="game-stat">
+                                    <div class="game-stat-value">45min</div>
+                                    <div class="game-stat-label">Duración</div>
+                                </div>
+                                <div class="game-stat">
+                                    <div class="game-stat-value">18</div>
+                                    <div class="game-stat-label">Stock</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="game-card">
+                        <div class="game-image">🔤</div>
+                        <div class="game-content">
+                            <h3 class="game-title">Scrabble</h3>
+                            <div class="game-meta">
+                                <span class="game-tag">Palabras</span>
+                                <span class="game-tag">Educativo</span>
+                            </div>
+                            <p class="game-description">
+                                Forma palabras cruzadas con fichas de letras y acumula la mayor puntuación. Desafía tu vocabulario.
+                            </p>
+                            <div class="game-stats">
+                                <div class="game-stat">
+                                    <div class="game-stat-value">2-4</div>
+                                    <div class="game-stat-label">Jugadores</div>
+                                </div>
+                                <div class="game-stat">
+                                    <div class="game-stat-value">90min</div>
+                                    <div class="game-stat-label">Duración</div>
+                                </div>
+                                <div class="game-stat">
+                                    <div class="game-stat-value">22</div>
+                                    <div class="game-stat-label">Stock</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="game-card">
+                        <div class="game-image">🎖️</div>
+                        <div class="game-content">
+                            <h3 class="game-title">Risk</h3>
+                            <div class="game-meta">
+                                <span class="game-tag">Estrategia</span>
+                                <span class="game-tag">Guerra</span>
+                            </div>
+                            <p class="game-description">
+                                Conquista el mundo en este épico juego de estrategia militar. Forma alianzas y domina territorios.
+                            </p>
+                            <div class="game-stats">
+                                <div class="game-stat">
+                                    <div class="game-stat-value">2-6</div>
+                                    <div class="game-stat-label">Jugadores</div>
+                                </div>
+                                <div class="game-stat">
+                                    <div class="game-stat-value">180min</div>
+                                    <div class="game-stat-label">Duración</div>
+                                </div>
+                                <div class="game-stat">
+                                    <div class="game-stat-value">12</div>
+                                    <div class="game-stat-label">Stock</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="game-card">
+                        <div class="game-image">⚫</div>
+                        <div class="game-content">
+                            <h3 class="game-title">Jenga</h3>
+                            <div class="game-meta">
+                                <span class="game-tag">Habilidad</span>
+                                <span class="game-tag">Party</span>
+                            </div>
+                            <p class="game-description">
+                                Retira bloques de la torre sin que se derrumbe. Pulso firme y estrategia para ganar este clásico.
+                            </p>
+                            <div class="game-stats">
+                                <div class="game-stat">
+                                    <div class="game-stat-value">1-8</div>
+                                    <div class="game-stat-label">Jugadores</div>
+                                </div>
+                                <div class="game-stat">
+                                    <div class="game-stat-value">20min</div>
+                                    <div class="game-stat-label">Duración</div>
+                                </div>
+                                <div class="game-stat">
+                                    <div class="game-stat-value">30</div>
+                                    <div class="game-stat-label">Stock</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="game-card">
+                        <div class="game-image">🎨</div>
+                        <div class="game-content">
+                            <h3 class="game-title">Pictionary</h3>
+                            <div class="game-meta">
+                                <span class="game-tag">Dibujo</span>
+                                <span class="game-tag">Party</span>
+                            </div>
+                            <p class="game-description">
+                                Dibuja y adivina en equipos. El juego perfecto para reírse y demostrar tus habilidades artísticas.
+                            </p>
+                            <div class="game-stats">
+                                <div class="game-stat">
+                                    <div class="game-stat-value">4-16</div>
+                                    <div class="game-stat-label">Jugadores</div>
+                                </div>
+                                <div class="game-stat">
+                                    <div class="game-stat-value">60min</div>
+                                    <div class="game-stat-label">Duración</div>
+                                </div>
+                                <div class="game-stat">
+                                    <div class="game-stat-value">15</div>
+                                    <div class="game-stat-label">Stock</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="game-card">
+                        <div class="game-image">♟️</div>
+                        <div class="game-content">
+                            <h3 class="game-title">Ajedrez</h3>
+                            <div class="game-meta">
+                                <span class="game-tag">Estrategia</span>
+                                <span class="game-tag">Clásico</span>
+                            </div>
+                            <p class="game-description">
+                                El juego milenario de estrategia por excelencia. Planifica tus movimientos y captura al rey enemigo.
+                            </p>
+                            <div class="game-stats">
+                                <div class="game-stat">
+                                    <div class="game-stat-value">2</div>
+                                    <div class="game-stat-label">Jugadores</div>
+                                </div>
+                                <div class="game-stat">
+                                    <div class="game-stat-value">60min</div>
+                                    <div class="game-stat-label">Duración</div>
+                                </div>
+                                <div class="game-stat">
+                                    <div class="game-stat-value">35</div>
+                                    <div class="game-stat-label">Stock</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="game-card">
+                        <div class="game-image">🃏</div>
+                        <div class="game-content">
+                            <h3 class="game-title">UNO</h3>
+                            <div class="game-meta">
+                                <span class="game-tag">Cartas</span>
+                                <span class="game-tag">Familiar</span>
+                            </div>
+                            <p class="game-description">
+                                El juego de cartas más popular del mundo. Descarta todas tus cartas y grita "¡UNO!" antes que los demás.
+                            </p>
+                            <div class="game-stats">
+                                <div class="game-stat">
+                                    <div class="game-stat-value">2-10</div>
+                                    <div class="game-stat-label">Jugadores</div>
+                                </div>
+                                <div class="game-stat">
+                                    <div class="game-stat-value">30min</div>
+                                    <div class="game-stat-label">Duración</div>
+                                </div>
+                                <div class="game-stat">
+                                    <div class="game-stat-value">40</div>
+                                    <div class="game-stat-label">Stock</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="game-card">
+                        <div class="game-image">🎯</div>
+                        <div class="game-content">
+                            <h3 class="game-title">Twister</h3>
+                            <div class="game-meta">
+                                <span class="game-tag">Físico</span>
+                                <span class="game-tag">Party</span>
+                            </div>
+                            <p class="game-description">
+                                Coloca manos y pies en los círculos de colores sin caerte. Diversión y risas aseguradas en cada partida.
+                            </p>
+                            <div class="game-stats">
+                                <div class="game-stat">
+                                    <div class="game-stat-value">2-4</div>
+                                    <div class="game-stat-label">Jugadores</div>
+                                </div>
+                                <div class="game-stat">
+                                    <div class="game-stat-value">10min</div>
+                                    <div class="game-stat-label">Duración</div>
+                                </div>
+                                <div class="game-stat">
+                                    <div class="game-stat-value">20</div>
+                                    <div class="game-stat-label">Stock</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="games-section">
+                <h2 class="section-title">Características Principales</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3 class="feature-title">Control Preciso</h3>
+                        <p class="feature-description">
+                            Mantén un registro detallado de cada juego en tu colección con información completa 
+                            sobre disponibilidad, condición y ubicación exacta.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3 class="feature-title">Análisis Avanzado</h3>
+                        <p class="feature-description">
+                            Genera reportes detallados y estadísticas en tiempo real para tomar decisiones 
+                            informadas sobre tu inventario y optimizar tu colección.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔔</div>
+                        <h3 class="feature-title">Alertas Inteligentes</h3>
+                        <p class="feature-description">
+                            Recibe notificaciones automáticas sobre stock bajo, préstamos pendientes y 
+                            recordatorios de mantenimiento de tus juegos.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌐</div>
+                        <h3 class="feature-title">Acceso Universal</h3>
+                        <p class="feature-description">
+                            Accede a tu inventario desde cualquier dispositivo, en cualquier lugar. 
+                            Sincronización automática en la nube.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3 class="feature-title">Seguridad Total</h3>
+                        <p class="feature-description">
+                            Protección de datos con encriptación de nivel empresarial y respaldos 
+                            automáticos para mantener tu información segura.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚙️</div>
+                        <h3 class="feature-title">Personalización</h3>
+                        <p class="feature-description">
+                            Adapta el sistema a tus necesidades específicas con campos personalizados, 
+                            categorías y etiquetas configurables.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+         
+
+        <!-- MARCO TEÓRICO -->
+        <div class="page" id="marco">
+            <div class="section" id="introduccion">
+                <h2>Marco Teórico</h2>
+                
+                <h3>Introducción</h3>
+                <p>En la actualidad, una gestión eficiente del inventario representa un factor determinante para el éxito operativo de cualquier empresa, o negocio dedicado a la comercialización de productos físicos. “MonsterDojo” es una tienda especializada en la venta de juegos de mesa, artículos de colección y productos relacionados con la cultura geek.</p>
+                <p>Debido a la creciente variedad de su catálogo y a la necesidad de atender tanto ventas presenciales como envíos a otras regiones, se ha identificado la necesidad de implementar un sistema informático que automatice y optimice el control del inventario. </p>
+                <p>Este proyecto tiene como propósito principal el análisis, diseño y propuesta de un sistema de inventario para la tienda “MonsterDojo”, que permita registrar productos, gestionar proveedores, controlar el stock disponible, registrar ventas y reservas, así como generar reportes gerenciales que respalden la toma de decisiones para el gerente de la tienda. El sistema está orientado a mejorar la eficiencia del personal operativo, facilitar las tareas del gerente y mantener un historial detallado de las transacciones realizadas, lo cual permite una supervisión efectiva del inventario y la actividad de ventas. </p>
+                <p>Para cumplir con estos objetivos, el desarrollo del sistema se basa en una metodología mixta que combina el Análisis Estructurado y el Análisis Orientado a Objetos. El enfoque estructurado permite definir con precisión los flujos de información y las interacciones entre los distintos actores. Por su parte, el paradigma orientado a objetos ofrece una estructura lógica más modular, reutilizable y escalable, a través de diagramas de clases y la identificación de entidades con sus respectivos atributos y comportamientos. </p>
+
+            </div>
+
+            <div class="section" id="antecedentes">
+                <h3>Antecedentes</h3>
+                <p>La tienda “MonsterDojo” es una tienda especializada en la comercialización de juegos de mesa. Actualmente opera de forma presencial y también mediante envíos a distintos departamentos del país, lo cual requiere una gestión organizada del inventario y de los productos disponibles para su distribución. La variedad de artículos ofrecidos ha incrementado con el tiempo, lo que ha derivado en una mayor necesidad de control en el registro de productos y su procedencia.</p>
+                <p>Por medio de recolección de datos a través de entrevistas y reuniones con el gerente, se nos indicó que, cada producto que ingresa al inventario cuenta con un precio de adquisición, correspondiente al costo de compra asumido por la tienda, y un precio de venta, definido por el negocio. Además, se ha considerado la posibilidad de generar automáticamente un precio sugerido de venta, con base en el margen de ganancia deseado, como apoyo en la toma de decisiones comerciales. </p>
+                <p>La tienda mantiene relaciones con diversos proveedores, quienes abastecen el inventario de juegos de mesa. Un mismo proveedor puede ofrecer múltiples productos, los cuales deben registrarse junto con su precio de adquisición y la fecha en la que ingresan al inventario. </p>
+                <p>También el gerente nos explicó que el manejo de los procesos relacionados al registro de productos, ingreso de stock y gestión de proveedores se realizan manualmente mediante hojas de cálculo en Excel, lo que ha demostrado ser una solución limitada ante el aumento de productos, pedidos. Sin embargo, para el control de inventario, depende en gran medida de la memoria del propio gerente, quien recuerda qué productos hay disponibles y cuándo se agotan, lo que representa un riesgo significativo ante la falta de información actualizada. <p>
+                <p>Esta situación evidencia la necesidad de implementar un sistema informático que automatice dichas tareas, optimice la organización del inventario y centralice la información de productos y proveedores de manera eficiente, accesible y confiable. <p>
+
+            </div>
+
+            <div class="section" id="objetivos">
+                <h3>Objetivos</h3>
+                <p>- Diagnosticar la situación actual de la tienda en relación con el control de inventario, identificando las principales debilidades, riesgos y necesidades operativas. </p>
+                <p>- Modelar los procesos de negocio mediante herramientas de análisis estructurado y orientado a objetos, representando claramente los flujos de información y entidades clave. </p>
+                <p>- Gestión de stock e historial de movimientos de inventario. </p> 
+                <p>- Administración de proveedores y compras. </p>
+                <p>- Registro de ventas y reservas. </p>
+
+            </div>
+
+            <div class="section" id="planteamiento">
+                <h3>Planteamiento del Problema</h3>
+                <p>MonsterDojo, una tienda especializada en la venta de juegos de mesa, ha experimentado un notable crecimiento en su volumen de ventas y en la cantidad de productos que ofrece. Como consecuencia, la gestión manual del inventario se ha vuelto ineficiente y problemática. El control tradicional que realiza el dueño ya no es suficiente para manejar con precisión las entradas y salidas de productos, lo que genera errores, retrasos y una falta de visibilidad clara del stock disponible.</p> 
+                <p>Esta situación afecta directamente a la logística del negocio, ya que dificulta la reposición oportuna de productos, la atención ágil a los clientes y la toma de decisiones estratégicas basadas en información actualizada. Además, el tiempo invertido en tareas manuales podría ser mejor aprovechado en otras áreas clave del negocio. </p>
+                <p>Por ello, MonsterDojo necesita incorporar un sistema digital que permita automatizar la gestión del inventario, facilitando el registro, seguimiento y control en tiempo real de los productos. Este sistema debe mejorar la eficiencia operativa, reducir los errores humanos y optimizar la experiencia tanto del propietario como de los clientes, asegurando un funcionamiento moderno y competitivo del negocio.</p> 
+
+            </div>
+
+            <div class="section" id="arbol">
+                <h3>Árbol de Problemas</h3>
+                <div class="image-placeholder">
+                    <p style="font-size: 0.9rem; margin-top: 1rem;"></p>
+                    <img src="images/Arbol de problemas.jpeg">
+                    
+                </div>
+            </div>
+
+            <div class="section" id="formulacion">
+                <h3>Formulación del Problema</h3>
+                <p>¿Por qué la tienda de juegos de mesa "MonsterDojo" sigue gestionando su inventario de forma manual, sin un sistema digital ni herramientas para el seguimiento diario, lo que provoca falta de stock, sobrestock, pérdidas económicas y una atención ineficiente al cliente?</p>
+                <p>La tienda de juegos de mesa "MonsterDojo" presenta una desorganización en el control de inventario, debido principalmente a la ausencia de un sistema digital, el control manual del stock, el registro impreciso de entradas y salidas, y el alto crecimiento de la tienda sin un sistema adecuado de seguimiento. Esta situación genera consecuencias negativas como: </p>
+	            <p>• Falta de stock en productos populares</p>
+	            <p>• Sobrestock de productos con baja rotación</p>
+	            <p>• Pérdida de ventas</p>
+	            <p>• Pedidos innecesarios a proveedores</p>
+                <p>• Disminución de la confianza del cliente</p>
+	            <p>• Reducción de ingresos para la tienda</p>
+
+            </div>
+
+            <div class="section" id="proposito">
+                <h3>Propósito del Estudio</h3>
+                <p>Desarrollar un sistema informático integral para la tienda “MonsterDojo” que automatice y optimice la gestión de inventario, facilitando el registro de productos, control de stock, administración de proveedores, registro de ventas y reservas, así como la generación de reportes gerenciales para apoyar la toma de decisiones estratégicas.</p>
+            </div>
+
+            <div class="section" id="metodologia">
+                <h3>Metodología</h3>
+                <p>Método</p>
+                <p>La investigación sobre la situación actual de la tienda se enmarca en un enfoque cuantitativo y descriptivo, ya que se busca recolectar datos específicos sobre el manejo actual del inventario en la tienda GeekZone y analizar los procesos logísticos para proponer una solución digital eficaz. Este método permite identificar patrones, debilidades y oportunidades dentro del sistema actual mediante datos concretos obtenidos de los actores involucrados.</p>
+                <p>Medios</p>
+                <p>Para llevar a cabo la recolección de datos, se utilizarán los siguientes medios: </p>
+                <p>• Observación directa del proceso manual actual de control de inventario. </p>
+	            <p>• Preguntas dirigidas al personal que participa en la gestión del stock. </p>
+	            <p>• Entrevistas breves al dueño o responsable del negocio, para entender los problemas y necesidades concretas. </p>
+                <p>Instrumentos de investigación</p>
+                <p>Los instrumentos seleccionados para la recolección de datos son: </p>
+                <p>• Cuestionario estructurado con preguntas cerradas, dirigido al personal de la tienda, para obtener datos cuantificables sobre errores frecuentes, tiempo invertido en el manejo del stock, frecuencia de pérdidas, etc.</p>
+                <p>• Guía de observación para registrar de forma sistemática los pasos del proceso actual de registro de productos. </p>
+                <p>• Entrevista semiestructurada con el dueño de MonsterDojo para profundizar en sus percepciones y necesidades específicas respecto a la digitalización del negocio. </p>
+                <p>Justificación</p>
+                <p>La elección del método cuantitativo permite obtener datos objetivos y medibles sobre los errores y dificultades del sistema actual, mientras que la incorporación de herramientas cualitativas como la entrevista ayuda a complementar la visión con aspectos más subjetivos y contextuales. Esto permitirá desarrollar un sistema digital de inventario más ajustado a las verdaderas necesidades del negocio. </p>
+                <p>Alcances</p>
+                <p>Esta investigación se centrará exclusivamente en los procesos internos de control de inventario de la tienda MonsterDojo, ubicada en La Paz, Bolivia, durante el primer semestre de 2025. No se abordarán áreas como marketing, ventas o atención al cliente, excepto en lo que estas se relacionen directamente con la gestión del stock. </p>
+
+
+
+            </div>
+        </div>
+
+        <!-- MODELO AMBIENTAL (Página separada) -->
+        <div class="page" id="modelo-ambiental">
+            <div class="section" id="declaracion-propositos">
+                <h2>Modelo Ambiental</h2>
+                
+                <h3>Declaración de Propósitos</h3>
+                <p>Contenido de la declaración de propósitos del sistema de inventario de juegos de mesa MonsterDojo.</p>
+            </div>
+
+            <div class="section" id="diagrama-contexto-ambiental">
+                <h3>Diagrama de Contexto</h3>
+                <div class="image-placeholder">
+                    <p style="font-size: 0.9rem; margin-top: 1rem;"></p>
+                    <img src="images/Diagrama de contexto.jpg">
+                </div>
+            </div>
+
+            <div class="section" id="lista-acontecimientos">
+                <h3>Lista de Acontecimientos</h3>
+                <p>- El empleado registra una venta</p>
+                <p>- El empleado registra una reserva</p>
+                <p>- El empleado consulta información de producto</p>
+                <p>- El gerente solicita reportes</p>
+                <p>- El gerente solicita stock</p>
+                <p>- El gerente consulta ingresos de productos</p>
+                <p>- El sistema envía al gerente un informe de productos</p>
+                <p>- El gerente registra o modifica productos</p>
+                <p>- El sistema solicita productos al proveedor</p> 
+                <p>- El sistema solicita devolución de productos al proveedor</p>
+                <p>- El proveedor entrega productos al sistema</p>
+                <p>- El proveedor responde a una solicitud</p>
+                <p>- El proveedor envía una factura</p>
+                <p>- El sistema registra datos de pago al proveedor</p>
+                <p>- El sistema solicita datos de producto</p>
+                <p>- El sistema recibe datos de producto</p>
+            </div>
+        </div>
+
+        <!-- MODELO DE COMPORTAMIENTO (Página separada) -->
+        <div class="page" id="modelo-comportamiento">
+            <div class="section" id="diagrama-general">
+                <h2>Modelo de Comportamiento</h2>
+                
+                <h3>Diagrama General del Sistema</h3>
+                <div class="image-placeholder">
+                    <p style="font-size: 0.9rem; margin-top: 1rem;">Diagrama general del sistema</p>
+                    <!-- Agrega aquí tu imagen del diagrama general -->
+                    <img src="images/DFD0.jpeg">
+                </div>
+            </div>
+
+            <div class="section" id="niveles-dfd">
+                <h3>Niveles de DFD</h3>
+                <div class="image-placeholder">
+                    <img src="images/DFD1.jpeg">  
+                </div>
+                <div class="image-placeholder">
+                    <img src="images/DFD2.jpeg">  
+                </div>
+                <div class="image-placeholder">
+                    <img src="images/DFD3.jpeg">  
+                </div>
+                <div class="image-placeholder">
+                    <img src="images/DFD4.jpeg">  
+                </div>
+            </div>
+
+            <div class="section" id="diccionario-datos-comportamiento">
+                <h3>Diccionario de Datos</h3>
+                <div class="image-placeholder">
+                    <p style="font-size: 0.9rem; margin-top: 1rem;"></p>
+                    <img src="images/DiccionarioDatos.jpeg">
+                </div>
+            </div>
+
+            <div class="section" id="diagrama-entidad-relacion">
+                <h3>Diagrama Entidad - Relación</h3>
+                <div class="image-placeholder">
+                    <p style="font-size: 0.9rem; margin-top: 1rem;"></p>
+                    <img src="images/Modelo E-R.jpeg">
+                </div>
+            </div>
+        </div>
+                
+
+        <!-- ANÁLISIS ESTRUCTURADO -->
+        <div class="page" id="analisis">
+            <div class="section" id="problematica">
+                <h2>Análisis Estructurado</h2>
+                
+                <h3>Problemática</h3>
+                <p>La tienda "MonsterDojo" especializada en juegos de mesa requiere un sistema de gestión de inventarios que automatice y optimice el control de su stock. Actualmente, la gestión manual mediante hojas de cálculo Excel y la dependencia de la memoria del gerente han generado ineficiencias, errores en el registro y falta de visibilidad en tiempo real del inventario disponible.</p>
+                
+                <h3>Modelos Utilizados para la Resolución del Problema</h3>
+                
+                <div class="model-info">
+                    <h4>1. Modelo Ambiental</h4>
+                    <p><strong>Concepto:</strong> El Modelo Ambiental define el entorno operativo del sistema, estableciendo sus límites e identificando todas las entidades externas con las que interactúa. Para MonsterDojo, este modelo nos permite comprender quiénes participan en el sistema y qué eventos desencadenan procesos.</p>
+                </div>
+                
+                <div class="model-info">
+                    <h4>2. Modelo de Comportamiento</h4>
+                    <p><strong>Concepto:</strong> El Modelo de Comportamiento detalla la lógica interna del sistema, especificando cómo procesa datos, responde a eventos y transforma información. Para MonsterDojo, este modelo estructura los procesos de negocio en flujos de datos coherentes.</p>
+                </div>
+                
+               
+            </div>
+        </div>
+
+        <!-- ORIENTADO A OBJETOS -->
+        <div class="page" id="objetos">
+            <div class="section" id="modelo-er">
+                <h2>Orientado a Objetos</h2>
+            </div>
+
+                <div class="section" id="modelo-uml">
+                    <h3>Diagrama de clases</h3>
+                        <div class="image-placeholder">
+                        <p style="font-size: 0.9rem; margin-top: 1rem;"></p>
+                        <img src="images/UML.png">
+                        </div>
+                </div>
+
+                <div class="section" id="modelo-sistema">
+                    <h3>Casos de Uso de Sistema</h3>
+                    <div class="image-placeholder">
+                        <p style="font-size: 0.9rem; margin-top: 1rem;"></p>
+                        <img src="images/CU_Sistema.jpg">
+                    </div>
+                </div>
+
+                
+
+                <div class="section" id="modelo-negocio">
+                    <h3>Casos de Uso de Negocio</h3>
+                    <div class="image-placeholder">
+                        <p style="font-size: 0.9rem; margin-top: 1rem;"></p>
+                        <img src="images/CU_Negocio.jpg">
+                    </div>
+                </div>
+
+                <div class="section" id="modelo-negocio">
+                    <h3>Casos de Uso de Tipo Texto Expandido</h3>
+                    <div class="image-placeholder">
+                        <p style="font-size: 0.9rem; margin-top: 1rem;"></p>
+                        <!-- CASO DE USO: REGISTRAR INGRESO DE PRODUCTOS -->
+                        <div class="section" id="caso-uso-ingreso">
+                            <h3>Caso de Uso: Registrar Ingreso de Productos al Inventario</h3>
+                            
+                            <div class="caso-uso-card">
+                                <div class="caso-uso-header">
+                                    <div class="caso-uso-icon">📦</div>
+                                    <div class="caso-uso-title">
+                                        <h4>Registrar Ingreso de Productos al Inventario</h4>
+                                        <p class="caso-uso-subtitle">Proceso de recepción y registro de nuevos productos</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="caso-uso-grid">
+                                    <!-- Columna izquierda -->
+                                    <div class="caso-uso-col">
+                                        <div class="caso-uso-info">
+                                            <h5>📋 Información General</h5>
+                                            <div class="info-item">
+                                                <span class="info-label">Grado de Detalle:</span>
+                                                <span class="info-value highlight">Expandido</span>
+                                            </div>
+                                            <div class="info-item">
+                                                <span class="info-label">Caso de Uso:</span>
+                                                <span class="info-value">Registrar ingreso de productos al inventario</span>
+                                            </div>
+                                            <div class="info-item">
+                                                <span class="info-label">Actores:</span>
+                                                <span class="info-value">
+                                                    <span class="actor-primary">Encargado de almacén (principal)</span>, 
+                                                    <span class="actor-secondary">Sistema de Inventario</span>
+                                                </span>
+                                            </div>
+                                            <div class="info-item">
+                                                <span class="info-label">Propósito:</span>
+                                                <span class="info-value">Registrar correctamente el ingreso de nuevos productos al almacén</span>
+                                            </div>
+                                            <div class="info-item">
+                                                <span class="info-label">Tipo:</span>
+                                                <span class="info-value badge-primary">Primario y esencial</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="caso-uso-info">
+                                            <h5>🔗 Referencias</h5>
+                                            <div class="info-item">
+                                                <span class="info-label">Referencias Cruzadas:</span>
+                                                <span class="info-value">
+                                                    <span class="reference">R3.1</span>
+                                                    <span class="reference">R3.2</span>
+                                                    <span class="reference">R3.3</span>
+                                                    <span class="reference">R3.5</span>
+                                                </span>
+                                            </div>
+                                            <div class="info-item">
+                                                <span class="info-label">Precondiciones:</span>
+                                                <span class="info-value">El usuario debe haber iniciado sesión como encargado. El sistema debe estar disponible y conectado a la base de datos.</span>
+                                            </div>
+                                            <div class="info-item">
+                                                <span class="info-label">Postcondiciones:</span>
+                                                <span class="info-value">El producto queda registrado en el inventario con fecha y hora. Se actualiza el stock total.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Columna derecha -->
+                                    <div class="caso-uso-col">
+                                        <div class="caso-uso-info">
+                                            <h5>📝 Resumen</h5>
+                                            <p>El encargado de almacén recibe productos físicos y los registra en el sistema de inventario. Se ingresan los datos del producto (nombre, código, cantidad, proveedor, fecha de ingreso, etc.). El sistema valida la información, actualiza el stock y guarda los registros.</p>
+                                        </div>
+                                        
+                                        <div class="caso-uso-info">
+                                            <h5>⚠️ Cursos Alternos</h5>
+                                            <ul class="alternate-list">
+                                                <li><strong>Línea 4:</strong> Si hay datos inválidos (ej. cantidad negativa, código duplicado), el sistema muestra un mensaje de error y no permite continuar.</li>
+                                                <li><strong>Línea 6:</strong> Si hay un error de conexión con la base de datos, se muestra un mensaje de falla y se recomienda intentar nuevamente.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Secuencia Normal de Eventos -->
+                                <div class="secuencia-eventos">
+                                    <h5>🔄 Secuencia Normal de Eventos</h5>
+                                    <div class="secuencia-table">
+                                        <div class="secuencia-header">
+                                            <div class="secuencia-col">Acciones del Actor</div>
+                                            <div class="secuencia-col">Respuesta del Sistema</div>
+                                        </div>
+                                        <div class="secuencia-row">
+                                            <div class="secuencia-col">
+                                                <span class="step-number">1.</span> El encargado accede al módulo de ingreso de productos.
+                                            </div>
+                                            <div class="secuencia-col">
+                                                <span class="step-number">2.</span> Muestra formulario para ingresar nuevos productos.
+                                            </div>
+                                        </div>
+                                        <div class="secuencia-row">
+                                            <div class="secuencia-col">
+                                                <span class="step-number">3.</span> Ingresa los datos requeridos: nombre, código, cantidad, proveedor, etc.
+                                            </div>
+                                            <div class="secuencia-col">
+                                                <span class="step-number">4.</span> Valida los datos ingresados.
+                                            </div>
+                                        </div>
+                                        <div class="secuencia-row">
+                                            <div class="secuencia-col">
+                                                <span class="step-number">5.</span> Confirma el ingreso de los productos.
+                                            </div>
+                                            <div class="secuencia-col">
+                                                <span class="step-number">6.</span> Registra la información en la base de datos.<br>
+                                                <span class="step-number">7.</span> Actualiza el stock del producto.<br>
+                                                <span class="step-number">8.</span> Genera un registro histórico del ingreso.<br>
+                                                <span class="step-number">9.</span> Muestra mensaje de éxito al usuario.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Funciones del Sistema -->
+                                <div class="funciones-sistema">
+                                    <h5>⚙️ Funciones del Sistema</h5>
+                                    <div class="funciones-table">
+                                        <div class="funciones-header">
+                                            <div class="funciones-col">Nro. Ref.</div>
+                                            <div class="funciones-col">FUNCIÓN</div>
+                                            <div class="funciones-col">CATEGORÍA</div>
+                                        </div>
+                                        <div class="funciones-row">
+                                            <div class="funciones-col">
+                                                <span class="ref-number">R3.1</span>
+                                            </div>
+                                            <div class="funciones-col">
+                                                Registro de productos ingresados al almacén
+                                            </div>
+                                            <div class="funciones-col">
+                                                <span class="categoria evidente">EVIDENTE</span>
+                                            </div>
+                                        </div>
+                                        <div class="funciones-row">
+                                            <div class="funciones-col">
+                                                <span class="ref-number">R3.2</span>
+                                            </div>
+                                            <div class="funciones-col">
+                                                Validación de datos del producto ingresado
+                                            </div>
+                                            <div class="funciones-col">
+                                                <span class="categoria evidente">EVIDENTE</span>
+                                            </div>
+                                        </div>
+                                        <div class="funciones-row">
+                                            <div class="funciones-col">
+                                                <span class="ref-number">R3.3</span>
+                                            </div>
+                                            <div class="funciones-col">
+                                                Actualización del stock general de productos
+                                            </div>
+                                            <div class="funciones-col">
+                                                <span class="categoria oculta">OCULTA</span>
+                                            </div>
+                                        </div>
+                                        <div class="funciones-row">
+                                            <div class="funciones-col">
+                                                <span class="ref-number">R3.5</span>
+                                            </div>
+                                            <div class="funciones-col">
+                                                Generación de registro histórico de movimientos de inventario
+                                            </div>
+                                            <div class="funciones-col">
+                                                <span class="categoria oculta">OCULTA</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIDEO -->
+        <div class="page" id="video">
+            <div class="section">
+                <h2>📹 Videos Demostrativos</h2>
+                <p>Aquí puedes ver demostraciones completas del sistema de inventarios de juegos de mesa desde diferentes perspectivas de análisis.</p>
+                
+                <div class="videos-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0;">
+                    <!-- Video 1: Análisis Estructurado -->
+                    <div class="video-section">
+                        <h3 style="color: #8b5cf6; margin-bottom: 1rem; font-size: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <span>📊</span> Análisis Estructurado
+                        </h3>
+                        <p style="color: #9ca3af; margin-bottom: 1.5rem; line-height: 1.6;">
+                            Enfoque tradicional del análisis estructurado para el sistema de inventarios de juegos de mesa.
+                        </p>
+                        <div class="video-container">
+                            <!-- Análisis Estructurado -->
+                            <iframe 
+                                src="https://www.youtube-nocookie.com/embed/GPMHuo_pUPA?rel=0" 
+                                title="Análisis Estructurado"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div style="margin-top: 1rem; text-align: center;">
+                            <a href="https://youtu.be/GPMHuo_pUPA" 
+                            target="_blank" 
+                            style="color: #c4b5fd; text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+                                <span>🔗</span> Abrir en YouTube
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Video 2: Orientado a Objetos -->
+                    <div class="video-section">
+                        <h3 style="color: #8b5cf6; margin-bottom: 1rem; font-size: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <span>🎯</span> Orientado a Objetos
+                        </h3>
+                        <p style="color: #9ca3af; margin-bottom: 1.5rem; line-height: 1.6;">
+                            Enfoque de análisis orientado a objetos para el sistema de inventarios de juegos de mesa.
+                        </p>
+                        <div class="video-container">
+                            <!-- Orientado a Objetos -->
+                            <iframe 
+                                src="https://www.youtube-nocookie.com/embed/vfEx47tDpIY?rel=0" 
+                                title="Orientado a Objetos"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div style="margin-top: 1rem; text-align: center;">
+                            <a href="https://youtu.be/vfEx47tDpIY" 
+                            target="_blank" 
+                            style="color: #c4b5fd; text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+                                <span>🔗</span> Abrir en YouTube
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Responsive Design para móviles -->
+                <style>
+                    @media (max-width: 768px) {
+                        .videos-grid {
+                            grid-template-columns: 1fr !important;
+                            gap: 3rem !important;
+                        }
+                    }
+                    
+                    .video-section {
+                        background: rgba(22, 27, 34, 0.6);
+                        border: 1px solid rgba(139, 92, 246, 0.2);
+                        border-radius: 16px;
+                        padding: 1.5rem;
+                        transition: all 0.3s ease;
+                    }
+                    
+                    .video-section:hover {
+                        border-color: #8b5cf6;
+                        box-shadow: 0 10px 30px rgba(139, 92, 246, 0.2);
+                        transform: translateY(-5px);
+                    }
+                </style>
+                
+                <!-- Descripción adicional -->
+                <div class="section" style="margin-top: 3rem; background: rgba(22, 27, 34, 0.8); padding: 1.5rem 2rem; border-radius: 12px;">
+                    <h3 style="color: #c4b5fd; margin-bottom: 1rem; font-size: 1.2rem;">📋 Información sobre los videos</h3>
+                    <ul style="color: #9ca3af; padding-left: 1.5rem; line-height: 1.6;">
+                        <li><strong>Análisis Estructurado:</strong> Enfoque tradicional que descompone el sistema en procesos funcionales.</li>
+                        <li><strong>Orientado a Objetos:</strong> Enfoque moderno que modela el sistema como objetos que interactúan.</li>
+                        <li>Ambos videos muestran el mismo sistema desde diferentes perspectivas metodológicas.</li>
+                        <li>Los videos están alojados en YouTube para fácil acceso y compatibilidad.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTACTOS -->
+        <div class="page" id="contacto">
+            <div class="section">
+                <h2>Contactos</h2>
+                <p>¿Tienes preguntas o sugerencias? ¡Contáctanos!</p>
+
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <div class="contact-icon">📧</div>
+                        <h3>Email</h3>
+                        <p>contacto@gameinventory.com</p>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">📱</div>
+                        <h3>Teléfono</h3>
+                        <p>+591 77586883</p>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">🌐</div>
+                        <h3>Sitio Web</h3>
+                        <p>www.gameinventory.com</p>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">📍</div>
+                        <h3>Ubicación</h3>
+                        <p>La Paz, Bolivia</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/scripts.js"></script>
+</body>
+</html>
